@@ -1,6 +1,6 @@
 <h1>Group Policy Object (GPO) implementations</h1>
-<p>GPO stands for Group Policy Object. It includes rules, settings, and policies for an organization. Group Policies control what users can and cannot do on a computer. For example, a Group Policy can make sure passwords are complex enough and prevent access to certain folders</p>
-<h3>*Disable or Prevent Shutdown Option for the users in Toronto OU</h3>
+<p>GPO stands for Group Policy Object. It includes rules, settings, and policies for an organization. Group Policies control what users can and cannot do on a computer. For example, a Group Policy can make sure passwords are complex enough and prevent access to certain folders. In this Project, I will be focusing on four concepts; Disabling or Preventing Shutdown Option for users in a certain OU, Disabling Command Line Interface (CMD) for users in another OU, Changing the default password policy and Automating software installation.  </p>
+<h3>*Disabling or Preventing Shutdown Option for the users in Toronto OU</h3>
 <p>We are going to following three steps to achieve this policy</p>
 <p>* Create</p>
 <p>* Apply</p>
@@ -38,7 +38,7 @@
 <br>
 <br>
 
-<h3>*Disable Command Line Interface (CMD) for the users in Ottawa OU</h3>
+<h3>*Disabling Command Line Interface (CMD) for the users in Ottawa OU</h3>
 <p>1. Still On the Group Policy Management Console, expand Forest, expand domains, expand domain name, right-click on Group Policy Objects and click on New.</p>
 <p align="center"><img src="https://i.imgur.com/Q6ySMha.png" height="50%" width="50%" alt="image"/>
 
@@ -71,7 +71,7 @@
 
 <br>
 
-<h3>*Change the default password policy [change the policy for the whole organization]</h3>
+<h3>*Changing the default password policy [for the whole organization]</h3>
 <p>1. Still On the Group Policy Management Console, expand Forest, expand domains, expand domain name, right-click on Group Policy Objects and click on New.</p>
 <p align="center"><img src="https://i.imgur.com/Q6ySMha.png" height="50%" width="50%" alt="image"/>
 
@@ -98,7 +98,7 @@
 
 <br>
 
-<h3>*Automate software installation</h3>
+<h3>*Automating software installation</h3>
 <p>1. To automate software Installation for all OU in the domain, first I needed to do was to download the Microsoft Software Installer(MSI) Package, so for Mozilla firefox, I went to “https://www.mozilla.org/en-CA/firefox/enterprise/” click on Download</p>
 <p align="center"><img src="https://i.imgur.com/AgePtyy.png" height="50%" width="50%" alt="image"/>
 
