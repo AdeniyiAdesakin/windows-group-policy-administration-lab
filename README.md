@@ -171,7 +171,7 @@ It also demonstrated the importance of secure scoping and distribution. Broad do
 
 1. Open **Server Manager > Tools > Group Policy Management**.
 
-   <p align="center"><img src="https://i.imgur.com/lWgeVSe.png" width="750" alt="Opening Group Policy Management from Server Manager"></p>
+   <p align="center"><img src="https://i.imgur.com/Rjkflqv.png" width="750" alt="Opening Group Policy Management from Server Manager"></p>
 
 2. Expand the forest and domain, right-click **Group Policy Objects**, and select **New**.
 
@@ -199,15 +199,15 @@ It also demonstrated the importance of secure scoping and distribution. Broad do
 
 8. Select the new GPO and confirm the link.
 
-   <p align="center"><img src="https://i.imgur.com/y7xoDUu.png" width="750" alt="Selecting the power-command GPO to link"></p>
+   <p align="center"><img src="https://i.imgur.com/ylkgEYE.png" width="750" alt="Selecting the power-command GPO to link"></p>
 
 9. Verify the GPO link beneath the intended OU.
 
-   <p align="center"><img src="https://i.imgur.com/gpQ3YIX.png" width="750" alt="Verifying the linked Group Policy Object"></p>
+   <p align="center"><img src="https://i.imgur.com/xu6BU98.png" width="750" alt="Verifying the linked Group Policy Object"></p>
 
 10. Sign in as a user in the targeted OU and validate the Windows power menu.
 
-    <p align="center"><img src="https://i.imgur.com/Wa5iOFW.png" width="750" alt="Validating the restricted Windows power menu"></p>
+    <p align="center"><img src="https://i.imgur.com/f8DdJhF.png" width="750" alt="Validating the restricted Windows power menu"></p>
 
 </details>
 
