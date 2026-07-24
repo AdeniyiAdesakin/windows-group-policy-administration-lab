@@ -1,6 +1,6 @@
 # Group Policy Administration and Windows Endpoint Configuration
 
-**Windows Server 2019 | Active Directory | Group Policy | Windows 11 | MSI Deployment**
+**Windows Server 2019 | Active Directory | Group Policy | Windows 10 | MSI Deployment**
 
 ## Project Overview
 
@@ -31,7 +31,7 @@ To address this, I created separate GPOs for each requirement, linked them to th
 | Component | Technology | Purpose |
 | --- | --- | --- |
 | Domain controller | Windows Server 2019 | Hosts AD DS, GPMC, and the lab domain |
-| Client workstation | Windows 11 | Receives and validates user and computer policies |
+| Client workstation | Windows 10 | Receives and validates user and computer policies |
 | Policy management | Group Policy Management Console | Creates, configures, links, and reviews GPOs |
 | Software package | Mozilla Firefox Enterprise MSI | Demonstrates centralized computer-based deployment |
 | Distribution point | SMB network share | Provides domain computers with access to the MSI package |
@@ -58,11 +58,11 @@ I created a user-based GPO and enabled:
 I linked the GPO to the designated user OU and validated that the affected user's Windows power menu no longer displayed those commands.
 
 <p align="center">
-  <img src="https://i.imgur.com/HjqBZpJ.png" width="750" alt="Enabling the policy that removes Windows power commands">
+  <img src="https://i.imgur.com/61iVckY.png" width="750" alt="Enabling the policy that removes Windows power commands">
 </p>
 
 <p align="center">
-  <img src="https://i.imgur.com/Wa5iOFW.png" width="750" alt="Windows power menu after the Group Policy setting was applied">
+  <img src="https://i.imgur.com/Mkf6pny.png" width="750" alt="Windows power menu after the Group Policy setting was applied">
 </p>
 
 
@@ -76,11 +76,11 @@ I created a second user-based GPO and enabled:
 After linking the policy to the intended user OU, I tested it from a client session and confirmed that Command Prompt displayed a restriction message.
 
 <p align="center">
-  <img src="https://i.imgur.com/QDb5sbZ.png" width="750" alt="Enabling the policy that restricts Command Prompt access">
+  <img src="https://i.imgur.com/nUnLMPY.png" width="750" alt="Enabling the policy that restricts Command Prompt access">
 </p>
 
 <p align="center">
-  <img src="https://i.imgur.com/Oda4CeE.png" width="750" alt="Command Prompt displaying an administrator restriction message">
+  <img src="htt" width="750" alt="Command Prompt displaying an administrator restriction message">
 </p>
 
 
@@ -91,14 +91,13 @@ I configured password requirements under:
 
 `Computer Configuration > Policies > Windows Settings > Security Settings > Account Policies > Password Policy`
 
-Because the settings were intended for domain accounts, I linked the policy at the domain root and validated it by attempting to use a password that did not meet the configured requirements.
 
 <p align="center">
-  <img src="https://i.imgur.com/W9OgEkJ.png" width="750" alt="Configuring the Active Directory domain password policy">
+  <img src="https://i.imgur.com/XriSH8o.png" width="750" alt="Configuring the Active Directory domain password policy">
 </p>
 
 <p align="center">
-  <img src="https://i.imgur.com/cuDz3Sh.png" width="750" alt="Windows rejecting a password that does not meet the domain policy">
+  <img src="https://i.imgur.com/Ka9arN8.png" width="750" alt="Windows rejecting a password that does not meet the domain policy">
 </p>
 
 
@@ -109,18 +108,16 @@ I downloaded the Firefox Enterprise MSI, placed it in a dedicated SMB distributi
 
 `Computer Configuration > Policies > Software Settings > Software Installation`
 
-I referenced the installer by its full UNC path, selected **Assigned**, linked the GPO to the intended computer scope, and validated the installation after computer policy processing and restart.
-
 <p align="center">
-  <img src="https://i.imgur.com/VfEy7tV.png" width="750" alt="Selecting the Firefox MSI through its UNC network path">
+  <img src="https://i.imgur.com/L7hAlnj.png" width="750" alt="Selecting the Firefox MSI through its UNC network path">
 </p>
 
 <p align="center">
-  <img src="https://i.imgur.com/8nnqVrb.png" width="750" alt="Firefox listed as an assigned Group Policy software package">
+  <img src="https://i.imgur.com/vtvJ8tJ.png" width="750" alt="Firefox listed as an assigned Group Policy software package">
 </p>
 
 <p align="center">
-  <img src="https://i.imgur.com/oAa6dtq.png" width="750" alt="Firefox installed on the Windows client through Group Policy">
+  <img src="https://i.imgur.com/hguhxKb.png" width="750" alt="Firefox installed on the Windows client through Group Policy">
 </p>
 
 
