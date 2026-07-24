@@ -278,59 +278,59 @@ It also demonstrated the importance of secure scoping and distribution. Broad do
 
 1. Download the Firefox Enterprise MSI from Mozilla's enterprise download page.
 
-   <p align="center"><img src="https://i.imgur.com/AgePtyy.png" width="750" alt="Downloading the Firefox Enterprise MSI package"></p>
+   <p align="center"><img src="https://i.imgur.com/2OURSOU.png" width="750" alt="Downloading the Firefox Enterprise MSI package"></p>
 
 2. Create a dedicated package folder on the server and share it as a software distribution point.
 
-   <p align="center"><img src="https://i.imgur.com/6hUsrUU.png" width="750" alt="Creating the MSI package distribution folder"></p>
+   <p align="center"><img src="https://i.imgur.com/9BtprUU.png" width="750" alt="Creating the MSI package distribution folder"></p>
 
 3. Configure share and NTFS permissions so deployment administrators can manage packages and target computer accounts have read access.
 
 4. Copy the approved MSI file into the distribution folder.
 
-   <p align="center"><img src="https://i.imgur.com/Sm3FbZa.png" width="750" alt="Copying the Firefox MSI into the software distribution folder"></p>
+   <p align="center"><img src="https://i.imgur.com/a76wNwb.png" width="750" alt="Copying the Firefox MSI into the software distribution folder"></p>
 
 5. Create a dedicated computer-based software-deployment GPO.
 
-   <p align="center"><img src="https://i.imgur.com/taa3D0X.png" width="750" alt="Creating a software-deployment Group Policy Object"></p>
+   <p align="center"><img src="https://i.imgur.com/D3BN8j3.png" width="750" alt="Creating a software-deployment Group Policy Object"></p>
 
-   <p align="center"><img src="https://i.imgur.com/c1K3b3C.png" width="750" alt="Naming the Firefox deployment GPO"></p>
+   <p align="center"><img src="https://i.imgur.com/106G6Dv.png" width="750" alt="Naming the Firefox deployment GPO"></p>
 
 6. Edit the new GPO.
 
-   <p align="center"><img src="https://i.imgur.com/M4eS9Ce.png" width="750" alt="Opening the Firefox deployment GPO for editing"></p>
+   <p align="center"><img src="https://i.imgur.com/pYM4CwC.png" width="750" alt="Opening the Firefox deployment GPO for editing"></p>
 
 7. Navigate to **Computer Configuration > Policies > Software Settings > Software Installation**, then select **New > Package**.
 
-   <p align="center"><img src="https://i.imgur.com/bZ4HRNe.png" width="750" alt="Creating a new Group Policy software package"></p>
+   <p align="center"><img src="https://i.imgur.com/0OiG5yh.png" width="750" alt="Creating a new Group Policy software package"></p>
 
 8. Enter the complete UNC path to the MSI package and open the file.
 
-   <p align="center"><img src="https://i.imgur.com/VfEy7tV.png" width="750" alt="Opening the MSI package through its UNC path"></p>
+   <p align="center"><img src="https://i.imgur.com/pLeVxL6.png" width="750" alt="Opening the MSI package through its UNC path"></p>
 
 9. Select **Assigned** as the deployment method.
 
-   <p align="center"><img src="https://i.imgur.com/mFFYO8g.png" width="750" alt="Assigning the MSI package to computers"></p>
+   <p align="center"><img src="https://i.imgur.com/pwqyRZF.png" width="750" alt="Assigning the MSI package to computers"></p>
 
 10. Confirm that the package appears in the Software Installation policy.
 
-    <p align="center"><img src="https://i.imgur.com/8nnqVrb.png" width="750" alt="Verifying the assigned Firefox MSI package"></p>
+    <p align="center"><img src="https://i.imgur.com/MkpGvg7.png" width="750" alt="Verifying the assigned Firefox MSI package"></p>
 
-11. Link the GPO to the intended computer scope. A test computer OU is recommended before broad deployment.
+11. Link the GPO to the intended computer scope. (A test computer OU is recommended before broad deployment).
 
-    <p align="center"><img src="https://i.imgur.com/Nh7VzSs.png" width="750" alt="Linking the Firefox deployment GPO"></p>
+    <p align="center"><img src="https://i.imgur.com/IFSEq5o.png" width="750" alt="Linking the Firefox deployment GPO"></p>
 
 12. Select the deployment GPO and confirm the link.
 
-    <p align="center"><img src="https://i.imgur.com/QjHKfgW.png" width="750" alt="Selecting the Firefox deployment GPO"></p>
+    <p align="center"><img src="https://i.imgur.com/bkf9Yds.png" width="750" alt="Selecting the Firefox deployment GPO"></p>
 
 13. Verify the link in GPMC.
 
-    <p align="center"><img src="https://i.imgur.com/Ysm7cYp.png" width="750" alt="Verifying the linked software-deployment policy"></p>
+    <p align="center"><img src="https://i.imgur.com/TfTZ0LI.png" width="750" alt="Verifying the linked software-deployment policy"></p>
 
 14. Restart the targeted client and confirm that Firefox is installed.
 
-    <p align="center"><img src="https://i.imgur.com/oAa6dtq.png" width="750" alt="Validating the Firefox installation on the Windows client"></p>
+    <p align="center"><img src="https://i.imgur.com/QZiDMRe.png" width="750" alt="Validating the Firefox installation on the Windows client"></p>
 
 
 </details>
