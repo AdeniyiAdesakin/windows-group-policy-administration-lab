@@ -137,22 +137,6 @@ I referenced the installer by its full UNC path, selected **Assigned**, linked t
 </p>
 
 
-## Secure Software-Share Permissions
-
-A production-style distribution point should use permissions similar to the following:
-
-| Principal | Share permission | NTFS permission | Purpose |
-| --- | --- | --- | --- |
-| Domain Administrators or software-deployment administrators | Full Control | Modify or Full Control | Manage approved packages |
-| Domain Computers or a dedicated deployment group | Read | Read and Execute | Allow targeted computers to retrieve the MSI |
-| Standard users | None unless required | None unless required | Avoid unnecessary access |
-
-The package should always be referenced with a full UNC path such as:
-
-```text
-\\ADDS-Server\MSI-Package\Firefox.msi
-```
-
 ## Policy Validation
 
 I validated the policies through visible client behavior and the following administrative checks:
