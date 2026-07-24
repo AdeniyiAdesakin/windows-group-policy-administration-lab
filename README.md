@@ -207,7 +207,7 @@ It also demonstrated the importance of secure scoping and distribution. Broad do
 
 10. Sign in as a user in the targeted OU and validate the Windows power menu.
 
-    <p align="center"><img src="https://i.imgur.com/f8DdJhF.png" width="750" alt="Validating the restricted Windows power menu"></p>
+    <p align="center"><img src="https://i.imgur.com/5RrtUgJ.png" width="750" alt="Validating the restricted Windows power menu"></p>
 
 </details>
 
