@@ -249,27 +249,27 @@ It also demonstrated the importance of secure scoping and distribution. Broad do
 
 1. Create and edit a GPO intended for the domain account policy.
 
-   <p align="center"><img src="https://i.imgur.com/ooT3sWR.png" width="750" alt="Naming the domain password policy GPO"></p>
+   <p align="center"><img src="https://i.imgur.com/ZBdxVES.png" width="750" alt="Naming the domain password policy GPO"></p>
 
 2. Navigate to **Computer Configuration > Policies > Windows Settings > Security Settings > Account Policies > Password Policy** and configure the required settings.
 
-   <p align="center"><img src="https://i.imgur.com/W9OgEkJ.png" width="750" alt="Configuring domain password requirements"></p>
+   <p align="center"><img src="https://i.imgur.com/95f5LVC.png" width="750" alt="Configuring domain password requirements"></p>
 
 3. Link the GPO at the domain root so it can define the domain account policy.
 
-   <p align="center"><img src="https://i.imgur.com/cahkQiN.png" width="750" alt="Linking the password policy at the domain root"></p>
+   <p align="center"><img src="https://i.imgur.com/HXz4Hzy.png" width="750" alt="Linking the password policy at the domain root"></p>
 
 4. Select the password-policy GPO and confirm the link.
 
-   <p align="center"><img src="https://i.imgur.com/YxMENep.png" width="750" alt="Selecting the password-policy GPO"></p>
+   <p align="center"><img src="https://i.imgur.com/xW61TqR.png" width="750" alt="Selecting the password-policy GPO"></p>
 
 5. Verify that the policy appears beneath the domain.
 
-   <p align="center"><img src="https://i.imgur.com/43VKvdF.png" width="750" alt="Verifying the domain-level password-policy link"></p>
+   <p align="center"><img src="https://i.imgur.com/sDvZ9dz.png" width="750" alt="Verifying the domain-level password-policy link"></p>
 
 6. Test the policy by attempting to set a noncompliant password and confirm that Windows rejects it.
 
-   <p align="center"><img src="https://i.imgur.com/cuDz3Sh.png" width="750" alt="Validating enforcement of the domain password policy"></p>
+   <p align="center"><img src="https://i.imgur.com/ln21R31.png" width="750" alt="Validating enforcement of the domain password policy"></p>
 
 </details>
 
