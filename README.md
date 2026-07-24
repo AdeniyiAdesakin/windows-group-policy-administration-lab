@@ -1,161 +1,378 @@
-<h1>Group Policy Object (GPO) implementations</h1>
-<p>GPO stands for Group Policy Object. It includes rules, settings, and policies for an organization. Group Policies control what users can and cannot do on a computer. For example, a Group Policy can make sure passwords are complex enough and prevent access to certain folders. In this Project, I will be focusing on four concepts; Disabling or Preventing Shutdown Option for users in a certain OU, Disabling Command Line Interface (CMD) for users in another OU, Changing the default password policy and Automating software installation.  </p>
-<h3>*Disabling or Preventing Shutdown Option for the users in Toronto OU</h3>
-<p>We are going to following three steps to achieve this policy</p>
-<p>* Create</p>
-<p>* Apply</p>
-<p>* Link to OU</p>
-<p>1. To create this policy, go to server manager-dashboard >Tools> Group policy Management</p>
-<p align="center"><img src="https://i.imgur.com/lWgeVSe.png" height="50%" width="50%" alt="image"/>
+# Group Policy Administration and Windows Endpoint Configuration
 
-<p>2. On the Group Policy Management Console, expand Forest, expand domains, expand domain name, right-click on Group Policy Objects and click on New.</p>
-<p align="center"><img src="https://i.imgur.com/omMBd8n.png" height="50%" width="50%" alt="image"/>
+**Windows Server 2019 | Active Directory | Group Policy | Windows 11 | MSI Deployment**
 
-<p>3. On the New GPO screen, type in a descriptive name for the policy(no space) then click OK</p>
-<p align="center"><img src="https://i.imgur.com/MqpBeX5.png" height="50%" width="50%" alt="image"/>
+## Project Overview
 
-<p>4. Back on the Group Policy Management screen, expand Group Policy Objects, right-click on the new policy created and click on Edit </p>
-<p align="center"><img src="https://i.imgur.com/lXuGE4W.png" height="50%" width="50%" alt="image"/>
+I designed, configured, scoped, and tested four Group Policy Objects (GPOs) in a Windows Active Directory lab. The policies controlled selected user-interface features, restricted access to Command Prompt, enforced a domain password policy, and deployed Mozilla Firefox to Windows client computers from a shared MSI package.
 
-<p>5. Go to this path to edit this policy; User Configuration >Policies > Administrative Templates > Start Menu and Taskbar > Remove and Prevent Access to the shutdown, sleep and restart command.</p>
-<p align="center"><img src="https://i.imgur.com/ODoh6oJ.png" height="50%" width="50%" alt="image"/>
+This project demonstrates how Group Policy can be used to apply consistent user and computer settings across an Active Directory environment while reducing the need to configure endpoints individually.
 
-<p>6. Double click on the “Remove and Prevent Access to the shutdown, sleep and restart command”, click on Enabled, Apply and then OK</p>
-<p align="center"><img src="https://i.imgur.com/HjqBZpJ.png" height="50%" width="50%" alt="image"/>
+## Simulated Business Scenario
 
-<p>7. To link this policy to an OU, back on the Group Policy Management screen, right-click on the OU and click on Link an existing GPO</p>
-<p align="center"><img src="https://i.imgur.com/Ng0gue3.png" height="50%" width="50%" alt="image"/>
+An organization needs a centralized method for applying security settings, user restrictions, and standard software across domain-joined computers. Configuring each workstation manually would be slow, inconsistent, and difficult to audit.
 
-<p>8. On the Select GPO screen, click on the GPO you want to link and click OK</p>
-<p align="center"><img src="https://i.imgur.com/y7xoDUu.png" height="50%" width="50%" alt="image"/>
+To address this, I created separate GPOs for each requirement, linked them to the appropriate domain or organizational-unit scope, updated policy on the client, and validated the resulting user or computer behavior.
 
-<p>9. On the Group Policy Screen, expand or click on the OU and the GPO linked can be seen</p>
-<p align="center"><img src="https://i.imgur.com/gpQ3YIX.png" height="50%" width="50%" alt="image"/>
+## Project Objectives
 
-<p>10. Logging in to one of the user account in Ottawa OU, you can see there is no options of shutting down or restart again</p>
-<p align="center"><img src="https://i.imgur.com/Wa5iOFW.png" height="50%" width="50%" alt="image"/>
+- Create clearly named GPOs in the Group Policy Management Console (GPMC).
+- Configure separate user and computer policies.
+- Link each GPO to the correct Active Directory scope.
+- Remove selected power commands from the Windows user interface.
+- Restrict interactive access to Command Prompt for a designated user OU.
+- Configure a domain-wide password policy.
+- Deploy an MSI package to domain-joined computers through a secure network share.
+- Validate policy application from a Windows client.
+- Use `gpresult` and Group Policy Results to support troubleshooting.
 
-<br>
-<br>
+## Lab Environment
 
-<h3>*Disabling Command Line Interface (CMD) for the users in Ottawa OU</h3>
-<p>1. Still On the Group Policy Management Console, expand Forest, expand domains, expand domain name, right-click on Group Policy Objects and click on New.</p>
-<p align="center"><img src="https://i.imgur.com/Q6ySMha.png" height="50%" width="50%" alt="image"/>
+| Component | Technology | Purpose |
+| --- | --- | --- |
+| Domain controller | Windows Server 2019 | Hosts AD DS, GPMC, and the lab domain |
+| Client workstation | Windows 11 | Receives and validates user and computer policies |
+| Policy management | Group Policy Management Console | Creates, configures, links, and reviews GPOs |
+| Software package | Mozilla Firefox Enterprise MSI | Demonstrates centralized computer-based deployment |
+| Distribution point | SMB network share | Provides domain computers with access to the MSI package |
 
-<p>2. On the New GPO screen, type in a descriptive name for the policy(no space) then click OK</p>
-<p align="center"><img src="https://i.imgur.com/S6kQSTi.png" height="50%" width="50%" alt="image"/>
+## Policy Design
 
-<p>3. Back on the Group Policy Management screen, expand Group Policy Objects, right-click on the new policy created and click on Edit </p>
-<p align="center"><img src="https://i.imgur.com/NeEcZEJ.png" height="50%" width="50%" alt="image"/>
+| Recommended GPO name | Configuration type | Scope | Validation |
+| --- | --- | --- | --- |
+| `USR - Restrict Power Commands` | User Configuration | Designated user OU | Shut down, restart, sleep, and hibernate commands were removed from the Windows interface |
+| `USR - Disable Command Prompt` | User Configuration | Designated user OU | Command Prompt displayed an administrator restriction message |
+| `DOM - Password Policy` | Computer Configuration / Account Policies | Domain root | A password that did not satisfy the configured requirements was rejected |
+| `CMP - Deploy Firefox` | Computer Configuration / Software Installation | Target computer scope | Firefox was installed and available on the Windows client after policy processing |
 
-<p>4. To edit this policy, go to this path; User Configuration > Policies > Administrative Templates > System > Prevent access to the command prompt.</p>
-<p align="center"><img src="https://i.imgur.com/wwUo9D7.png" height="50%" width="50%" alt="image"/>
+> **Project scope:** The user restrictions in this lab demonstrate centralized configuration. Removing power commands or blocking Command Prompt alone is not a complete security boundary.
 
-<p>5. Double click on System and click on Prevent access to the command prompt from the list.</p>
-<p align="center"><img src="https://i.imgur.com/TLQopUo.png" height="50%" width="50%" alt="image"/>
+## Skills Demonstrated
 
-<p>6. On the “Prevent access to the command prompt” screen, click on Enabled, then Apply and OK</p>
-<p align="center"><img src="https://i.imgur.com/QDb5sbZ.png" height="50%" width="50%" alt="image"/>
+- Group Policy creation, configuration, and linking
+- User Configuration and Computer Configuration policies
+- OU and domain-level policy scoping
+- Administrative Template configuration
+- Domain password-policy administration
+- MSI software assignment through Group Policy
+- UNC paths and SMB distribution points
+- Client-side policy refresh and validation
+- Resultant Set of Policy analysis with `gpresult`
+- Group Policy troubleshooting and documentation
 
-<p>7. To link this policy to an OU, back on the Group Policy Management screen, right-click on the OU and click on Link an existing GPO</p>
-<p align="center"><img src="https://i.imgur.com/z0nAVam.png" height="50%" width="50%" alt="image"/>
+## Implementation Summary
 
-<p>8. On the Select GPO screen, click on the GPO you want to link and click OK </p>
-<p align="center"><img src="https://i.imgur.com/54Zmem5.png" height="50%" width="50%" alt="image"/>
+### 1. Removed Power Commands from the Windows Interface
 
-<p>9. On the Group Policy Screen, expand or click on the OU and the GPO linked can be seen</p>
-<p align="center"><img src="https://i.imgur.com/dpQxn9w.png" height="50%" width="50%" alt="image"/>
+I created a user-based GPO and enabled:
 
-<p>10. Launching the Command Line Interface in one of the users in Ottawa OU, one can see the message that it has been disabled by the administrator</p>
-<p align="center"><img src="https://i.imgur.com/Oda4CeE.png" height="50%" width="50%" alt="image"/>
+`User Configuration > Policies > Administrative Templates > Start Menu and Taskbar > Remove and prevent access to the Shut Down, Restart, Sleep, and Hibernate commands`
 
-<br>
+I linked the GPO to the designated user OU and validated that the affected user's Windows power menu no longer displayed those commands.
 
-<h3>*Changing the default password policy [for the whole organization]</h3>
-<p>1. Still On the Group Policy Management Console, expand Forest, expand domains, expand domain name, right-click on Group Policy Objects and click on New.</p>
-<p align="center"><img src="https://i.imgur.com/Q6ySMha.png" height="50%" width="50%" alt="image"/>
+<p align="center">
+  <img src="https://i.imgur.com/HjqBZpJ.png" width="750" alt="Enabling the policy that removes Windows power commands">
+</p>
 
-<p>2. On the New GPO screen, type in a descriptive name for the policy(no space) then click OK</p>
-<p align="center"><img src="https://i.imgur.com/ooT3sWR.png" height="50%" width="50%" alt="image"/>
+<p align="center">
+  <img src="https://i.imgur.com/Wa5iOFW.png" width="750" alt="Windows power menu after the Group Policy setting was applied">
+</p>
 
-<p>3. Back on the Group Policy Management screen,  expand Group Policy Objects, right-click on the new policy created and click on Edit </p>
-<p align="center"><img src="https://i.imgur.com/MbPHNhe.png" height="50%" width="50%" alt="image"/>
+> This setting removes access to the listed interface commands. It should not be described as preventing every possible method of shutting down a computer.
 
-<p>4. Go to this Path; Computer Configuration > Policies > Windows Settings > Security settings > Account Policies > Password Policies and make the changes you require</p>
-<p align="center"><img src="https://i.imgur.com/W9OgEkJ.png" height="50%" width="50%" alt="image"/>
+### 2. Restricted Interactive Command Prompt Access
 
-<p>5. To Link this newly created policy, right-click on your domain (because it applies to the whole organization), click Link an existing GPO.</p>
-<p align="center"><img src="https://i.imgur.com/cahkQiN.png" height="50%" width="50%" alt="image"/>
+I created a second user-based GPO and enabled:
 
-<p>6. From the Select GPO screen, click on the policy you want to link and click OK.</p>
-<p align="center"><img src="https://i.imgur.com/YxMENep.png" height="50%" width="50%" alt="image"/>
+`User Configuration > Policies > Administrative Templates > System > Prevent access to the command prompt`
 
-<p>7. Back on the Group Policy Management screen, under the domain name, you can see the policy linked under it</p>
-<p align="center"><img src="https://i.imgur.com/43VKvdF.png" height="50%" width="50%" alt="image"/>
+After linking the policy to the intended user OU, I tested it from a client session and confirmed that Command Prompt displayed a restriction message.
 
-<p>8. To confirm this policy is implemented, I logged in a domain account account and provided a password which didn’t follow the policy requirement</p>
-<p align="center"><img src="https://i.imgur.com/cuDz3Sh.png" height="50%" width="50%" alt="image"/>
+<p align="center">
+  <img src="https://i.imgur.com/QDb5sbZ.png" width="750" alt="Enabling the policy that restricts Command Prompt access">
+</p>
 
-<br>
+<p align="center">
+  <img src="https://i.imgur.com/Oda4CeE.png" width="750" alt="Command Prompt displaying an administrator restriction message">
+</p>
 
-<h3>*Automating software installation</h3>
-<p>1. To automate software Installation for all OU in the domain, first I needed to do was to download the Microsoft Software Installer(MSI) Package, so for Mozilla firefox, I went to “https://www.mozilla.org/en-CA/firefox/enterprise/” click on Download</p>
-<p align="center"><img src="https://i.imgur.com/AgePtyy.png" height="50%" width="50%" alt="image"/>
+> Blocking Command Prompt does not automatically block PowerShell, Windows Terminal, scripts, or other administrative tools. Stronger application control would require additional controls such as AppLocker or Windows Defender Application Control.
 
-<p>2. Next, I created a folder in the C drive of the server named ‘MSI package’. This folder needs to shared and to do this, right-click on the folder and go to properties.</p>
-<p align="center"><img src="https://i.imgur.com/6hUsrUU.png" height="50%" width="50%" alt="image"/>
+### 3. Configured the Domain Password Policy
 
-<p>3. On the properties’ page, go to the sharing tab and click on share</p>
-<p align="center"><img src="https://i.imgur.com/9SlcFmg.png" height="50%" width="50%" alt="image"/>
+I configured password requirements under:
 
-<p>4. On the network access’ page, click on the dropdown, select everyone and click Add</p>
-<p align="center"><img src="https://i.imgur.com/O3cqtE2.png" height="50%" width="50%" alt="image"/>
+`Computer Configuration > Policies > Windows Settings > Security Settings > Account Policies > Password Policy`
 
-<p>5. Still on the network access page, make sure the permission level for “everyone” is Read/Write, then click Share</p>
-<p align="center"><img src="https://i.imgur.com/6jtSdOA.png" height="50%" width="50%" alt="image"/>
+Because the settings were intended for domain accounts, I linked the policy at the domain root and validated it by attempting to use a password that did not meet the configured requirements.
 
-<p>6. After that, you will get a message that your folder is shared, click Done</p>
-<p align="center"><img src="https://i.imgur.com/I5VlcEA.png" height="50%" width="50%" alt="image"/>
+<p align="center">
+  <img src="https://i.imgur.com/W9OgEkJ.png" width="750" alt="Configuring the Active Directory domain password policy">
+</p>
 
-<p>7. Back on the MSI Package properties, just click Close</p>
-<p align="center"><img src="https://i.imgur.com/Ek3eNuR.png" height="50%" width="50%" alt="image"/>
+<p align="center">
+  <img src="https://i.imgur.com/cuDz3Sh.png" width="750" alt="Windows rejecting a password that does not meet the domain policy">
+</p>
 
-<p>8. After sharing the folder, I then copied the MSI file from my local computer and paste it in the MSI Package folder created on the server machine</p>
-<p align="center"><img src="https://i.imgur.com/Sm3FbZa.png" height="50%" width="50%" alt="image"/>
+Each Active Directory domain has one effective domain account policy. If different groups require different password policies, fine-grained password policies should be used instead of linking password-policy GPOs to user OUs.
 
-<p>9. I created a new group policy by right-clicking on the Group Policy Object in Group Policy Management and clicking on New. Gave it a descriptive name</p>
-<p align="center"><img src="https://i.imgur.com/taa3D0X.png" height="50%" width="50%" alt="image"/>
-<p align="center"><img src="https://i.imgur.com/c1K3b3C.png" height="50%" width="50%" alt="image"/>
+### 4. Deployed Firefox with Group Policy
 
-<p>10. Now before we link this GPO we need to edit it first. To do this, right-click on the new GPO created and go to edit </p>
-<p align="center"><img src="https://i.imgur.com/M4eS9Ce.png" height="50%" width="50%" alt="image"/>
+I downloaded the Firefox Enterprise MSI, placed it in a dedicated SMB distribution share, and assigned the package under:
 
-<p>11. On the Group Policy Management Editor, go to this path Computer Configuration>Policies>Sofware Settings>Software Installation>New>Package</p>
-<p align="center"><img src="https://i.imgur.com/bZ4HRNe.png" height="50%" width="50%" alt="image"/>
+`Computer Configuration > Policies > Software Settings > Software Installation`
 
-<p>12. Now in the file explorer input the location where the Msi package is saved:<b> \\ADDS-Server\MSI-Package</b>, then select the file in the folder and click Open</p>
-<p align="center"><img src="https://i.imgur.com/VfEy7tV.png" height="50%" width="50%" alt="image"/>
+I referenced the installer by its full UNC path, selected **Assigned**, linked the GPO to the intended computer scope, and validated the installation after computer policy processing and restart.
 
-<p>13. On the deploy software page, make sure assigned is selected, then click OK</p>
-<p align="center"><img src="https://i.imgur.com/mFFYO8g.png" height="50%" width="50%" alt="image"/>
+<p align="center">
+  <img src="https://i.imgur.com/VfEy7tV.png" width="750" alt="Selecting the Firefox MSI through its UNC network path">
+</p>
 
-<p>14. Back on the Group Policy Management Editor, you can see the package you just deployed while the software installation tab is selected</p>
-<p align="center"><img src="https://i.imgur.com/8nnqVrb.png" height="50%" width="50%" alt="image"/>
+<p align="center">
+  <img src="https://i.imgur.com/8nnqVrb.png" width="750" alt="Firefox listed as an assigned Group Policy software package">
+</p>
 
-<p>15. To link this GPO to the whole organization, right click on the domain name and go to Link an existing GPO</p>
-<p align="center"><img src="https://i.imgur.com/Nh7VzSs.png" height="50%" width="50%" alt="image"/>
+<p align="center">
+  <img src="https://i.imgur.com/oAa6dtq.png" width="750" alt="Firefox installed on the Windows client through Group Policy">
+</p>
 
-<p>16. On the Select GPO page, select the intended GPO and click OK</p>
-<p align="center"><img src="https://i.imgur.com/QjHKfgW.png" height="50%" width="50%" alt="image"/>
+For secure software distribution, target computer accounts need read access to both the share and the MSI file. Standard users and `Everyone` should not receive unnecessary write access.
 
-<p>17. Back on the Group Policy Management page, under the domain name's list of GPO, you can see the policy linked under it</p>
-<p align="center"><img src="https://i.imgur.com/Ysm7cYp.png" height="50%" width="50%" alt="image"/>
+## Secure Software-Share Permissions
 
-<p>18. To confirm, I logged in to one of the client’s computer and the firefox deployed for the whole organization is there</p>
-<p align="center"><img src="https://i.imgur.com/oAa6dtq.png" height="50%" width="50%" alt="image"/>
+A production-style distribution point should use permissions similar to the following:
 
-<br>
+| Principal | Share permission | NTFS permission | Purpose |
+| --- | --- | --- | --- |
+| Domain Administrators or software-deployment administrators | Full Control | Modify or Full Control | Manage approved packages |
+| Domain Computers or a dedicated deployment group | Read | Read and Execute | Allow targeted computers to retrieve the MSI |
+| Standard users | None unless required | None unless required | Avoid unnecessary access |
+
+The package should always be referenced with a full UNC path such as:
+
+```text
+\\ADDS-Server\MSI-Package\Firefox.msi
+```
+
+## Policy Validation
+
+I validated the policies through visible client behavior and the following administrative checks:
+
+```powershell
+gpupdate /force
+gpresult /r
+gpresult /h "$env:USERPROFILE\Desktop\GPOReport.html" /f
+net accounts /domain
+```
+
+- `gpupdate /force` requests an immediate user and computer policy refresh.
+- `gpresult /r` displays a summary of the policies applied to the current user and computer.
+- `gpresult /h` generates an HTML Resultant Set of Policy report for deeper review.
+- `net accounts /domain` displays the effective domain password settings.
+
+For additional evidence, GPMC's **Group Policy Results Wizard** can show the winning GPO for each applied setting.
+
+## Troubleshooting Reference
+
+| Symptom | Likely cause | Verification or resolution |
+| --- | --- | --- |
+| A user policy does not apply | The user object is outside the linked OU, security filtering excludes the user, or another GPO has precedence | Generate a `gpresult /h` report and review the applied and denied GPOs |
+| A computer policy does not apply | The GPO is linked to a user OU instead of the computer's OU | Verify the computer object's location and review the GPO link scope |
+| The MSI package does not install | The computer cannot read the share, the package was selected by local path, or a restart has not occurred | Test the UNC path, review share and NTFS permissions, and restart the client |
+| The expected password policy is not effective | The account policy is linked below the domain root or loses precedence | Review domain-root links and confirm the effective settings with `net accounts /domain` |
+| Command Prompt remains available | The wrong user is being tested or the user policy has not refreshed | Run `gpupdate /force`, sign out, sign back in, and verify with `gpresult` |
+| Group Policy processing reports errors | DNS, SYSVOL access, network connectivity, or replication is unavailable | Verify domain DNS, test access to `\\<domain-name>\SYSVOL`, and review the GroupPolicy Operational event log |
+
+## Security and Administration Practices
+
+- Use descriptive GPO names that identify the target and purpose. GPO names can contain spaces.
+- Keep separate GPOs for logically separate settings to simplify testing and troubleshooting.
+- Test new policies in a controlled OU before applying them broadly.
+- Apply least privilege to GPO delegation, software shares, and package-management accounts.
+- Give deployment targets read access to software packages, not write access.
+- Use trusted, approved MSI packages and record their version and cryptographic hash.
+- Review inheritance, link order, enforcement, security filtering, and WMI filters before troubleshooting.
+- Back up GPOs and document changes before modifying production policy.
+- Use Group Policy Results or `gpresult` to prove what was actually applied instead of relying only on the GPO link.
+
+## Key Takeaways
+
+This project reinforced that creating a GPO is only one part of Group Policy administration. A policy must be configured in the correct user or computer section, linked to the appropriate scope, processed by the intended client, and validated through Resultant Set of Policy data or observable behavior.
+
+It also demonstrated the importance of secure scoping and distribution. Broad domain links and writable software shares may work in a lab, but production deployments should begin with a test OU, use least-privilege permissions, and expand only after successful validation.
+
+<details>
+<summary><strong>View the Power-Command Policy Walkthrough</strong></summary>
+
+1. Open **Server Manager > Tools > Group Policy Management**.
+
+   <p align="center"><img src="https://i.imgur.com/lWgeVSe.png" width="750" alt="Opening Group Policy Management from Server Manager"></p>
+
+2. Expand the forest and domain, right-click **Group Policy Objects**, and select **New**.
+
+   <p align="center"><img src="https://i.imgur.com/omMBd8n.png" width="750" alt="Creating a new Group Policy Object"></p>
+
+3. Give the GPO a clear, descriptive name. Spaces are allowed.
+
+   <p align="center"><img src="https://i.imgur.com/MqpBeX5.png" width="750" alt="Naming a new Group Policy Object"></p>
+
+4. Right-click the new GPO and select **Edit**.
+
+   <p align="center"><img src="https://i.imgur.com/lXuGE4W.png" width="750" alt="Editing a new Group Policy Object"></p>
+
+5. Navigate to **User Configuration > Policies > Administrative Templates > Start Menu and Taskbar** and open the power-command policy.
+
+   <p align="center"><img src="https://i.imgur.com/ODoh6oJ.png" width="750" alt="Locating the Windows power-command policy setting"></p>
+
+6. Select **Enabled**, apply the setting, and close the editor.
+
+   <p align="center"><img src="https://i.imgur.com/HjqBZpJ.png" width="750" alt="Enabling the power-command restriction policy"></p>
+
+7. Right-click the intended user OU and select **Link an Existing GPO**.
+
+   <p align="center"><img src="https://i.imgur.com/Ng0gue3.png" width="750" alt="Linking a Group Policy Object to a user OU"></p>
+
+8. Select the new GPO and confirm the link.
+
+   <p align="center"><img src="https://i.imgur.com/y7xoDUu.png" width="750" alt="Selecting the power-command GPO to link"></p>
+
+9. Verify the GPO link beneath the intended OU.
+
+   <p align="center"><img src="https://i.imgur.com/gpQ3YIX.png" width="750" alt="Verifying the linked Group Policy Object"></p>
+
+10. Sign in as a user in the targeted OU and validate the Windows power menu.
+
+    <p align="center"><img src="https://i.imgur.com/Wa5iOFW.png" width="750" alt="Validating the restricted Windows power menu"></p>
+
+</details>
+
+<details>
+<summary><strong>View the Command Prompt Policy Walkthrough</strong></summary>
+
+1. Create a separate GPO and open it in Group Policy Management Editor.
+
+   <p align="center"><img src="https://i.imgur.com/NeEcZEJ.png" width="750" alt="Opening the Command Prompt restriction GPO for editing"></p>
+
+2. Navigate to **User Configuration > Policies > Administrative Templates > System**.
+
+   <p align="center"><img src="https://i.imgur.com/wwUo9D7.png" width="750" alt="Opening System Administrative Templates"></p>
+
+3. Open **Prevent access to the command prompt**.
+
+   <p align="center"><img src="https://i.imgur.com/TLQopUo.png" width="750" alt="Selecting the Command Prompt restriction policy"></p>
+
+4. Select **Enabled**, review the script-processing option, and apply the setting.
+
+   <p align="center"><img src="https://i.imgur.com/QDb5sbZ.png" width="750" alt="Enabling the Command Prompt restriction"></p>
+
+5. Link the GPO to the intended user OU.
+
+   <p align="center"><img src="https://i.imgur.com/z0nAVam.png" width="750" alt="Linking the Command Prompt policy to a user OU"></p>
+
+6. Confirm that the GPO appears beneath the targeted OU.
+
+   <p align="center"><img src="https://i.imgur.com/dpQxn9w.png" width="750" alt="Verifying the Command Prompt GPO link"></p>
+
+7. Sign in as an affected user and launch Command Prompt to validate the restriction.
+
+   <p align="center"><img src="https://i.imgur.com/Oda4CeE.png" width="750" alt="Validating restricted Command Prompt access"></p>
+
+</details>
+
+<details>
+<summary><strong>View the Domain Password Policy Walkthrough</strong></summary>
+
+1. Create and edit a GPO intended for the domain account policy.
+
+   <p align="center"><img src="https://i.imgur.com/ooT3sWR.png" width="750" alt="Naming the domain password policy GPO"></p>
+
+2. Navigate to **Computer Configuration > Policies > Windows Settings > Security Settings > Account Policies > Password Policy** and configure the required settings.
+
+   <p align="center"><img src="https://i.imgur.com/W9OgEkJ.png" width="750" alt="Configuring domain password requirements"></p>
+
+3. Link the GPO at the domain root so it can define the domain account policy.
+
+   <p align="center"><img src="https://i.imgur.com/cahkQiN.png" width="750" alt="Linking the password policy at the domain root"></p>
+
+4. Select the password-policy GPO and confirm the link.
+
+   <p align="center"><img src="https://i.imgur.com/YxMENep.png" width="750" alt="Selecting the password-policy GPO"></p>
+
+5. Verify that the policy appears beneath the domain.
+
+   <p align="center"><img src="https://i.imgur.com/43VKvdF.png" width="750" alt="Verifying the domain-level password-policy link"></p>
+
+6. Test the policy by attempting to set a noncompliant password and confirm that Windows rejects it.
+
+   <p align="center"><img src="https://i.imgur.com/cuDz3Sh.png" width="750" alt="Validating enforcement of the domain password policy"></p>
+
+</details>
+
+<details>
+<summary><strong>View the Firefox MSI Deployment Walkthrough</strong></summary>
+
+1. Download the Firefox Enterprise MSI from Mozilla's enterprise download page.
+
+   <p align="center"><img src="https://i.imgur.com/AgePtyy.png" width="750" alt="Downloading the Firefox Enterprise MSI package"></p>
+
+2. Create a dedicated package folder on the server and share it as a software distribution point.
+
+   <p align="center"><img src="https://i.imgur.com/6hUsrUU.png" width="750" alt="Creating the MSI package distribution folder"></p>
+
+3. Configure share and NTFS permissions so deployment administrators can manage packages and target computer accounts have read access.
+
+4. Copy the approved MSI file into the distribution folder.
+
+   <p align="center"><img src="https://i.imgur.com/Sm3FbZa.png" width="750" alt="Copying the Firefox MSI into the software distribution folder"></p>
+
+5. Create a dedicated computer-based software-deployment GPO.
+
+   <p align="center"><img src="https://i.imgur.com/taa3D0X.png" width="750" alt="Creating a software-deployment Group Policy Object"></p>
+
+   <p align="center"><img src="https://i.imgur.com/c1K3b3C.png" width="750" alt="Naming the Firefox deployment GPO"></p>
+
+6. Edit the new GPO.
+
+   <p align="center"><img src="https://i.imgur.com/M4eS9Ce.png" width="750" alt="Opening the Firefox deployment GPO for editing"></p>
+
+7. Navigate to **Computer Configuration > Policies > Software Settings > Software Installation**, then select **New > Package**.
+
+   <p align="center"><img src="https://i.imgur.com/bZ4HRNe.png" width="750" alt="Creating a new Group Policy software package"></p>
+
+8. Enter the complete UNC path to the MSI package and open the file.
+
+   <p align="center"><img src="https://i.imgur.com/VfEy7tV.png" width="750" alt="Opening the MSI package through its UNC path"></p>
+
+9. Select **Assigned** as the deployment method.
+
+   <p align="center"><img src="https://i.imgur.com/mFFYO8g.png" width="750" alt="Assigning the MSI package to computers"></p>
+
+10. Confirm that the package appears in the Software Installation policy.
+
+    <p align="center"><img src="https://i.imgur.com/8nnqVrb.png" width="750" alt="Verifying the assigned Firefox MSI package"></p>
+
+11. Link the GPO to the intended computer scope. A test computer OU is recommended before broad deployment.
+
+    <p align="center"><img src="https://i.imgur.com/Nh7VzSs.png" width="750" alt="Linking the Firefox deployment GPO"></p>
+
+12. Select the deployment GPO and confirm the link.
+
+    <p align="center"><img src="https://i.imgur.com/QjHKfgW.png" width="750" alt="Selecting the Firefox deployment GPO"></p>
+
+13. Verify the link in GPMC.
+
+    <p align="center"><img src="https://i.imgur.com/Ysm7cYp.png" width="750" alt="Verifying the linked software-deployment policy"></p>
+
+14. Restart the targeted client and confirm that Firefox is installed.
+
+    <p align="center"><img src="https://i.imgur.com/oAa6dtq.png" width="750" alt="Validating the Firefox installation on the Windows client"></p>
 
 
+</details>
 
 
+## Related Projects
+
+- [Active Directory Domain Services Deployment and Windows Client Integration](https://github.com/AdeniyiAdesakin/Install-Active-Directory-Domain-Services-and-Join-Client-s-Computer-to-Active-Directory)
+- [Active Directory Identity Administration](https://github.com/AdeniyiAdesakin/Active-Directory-Implementation)
+- [Bulk Active Directory User Provisioning with PowerShell](https://github.com/AdeniyiAdesakin/Import-bulk-Users-from-a-CSV-Spreadsheet-with-PowerShell-)
