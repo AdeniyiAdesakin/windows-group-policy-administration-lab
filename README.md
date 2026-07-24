@@ -175,11 +175,11 @@ It also demonstrated the importance of secure scoping and distribution. Broad do
 
 2. Expand the forest and domain, right-click **Group Policy Objects**, and select **New**.
 
-   <p align="center"><img src="https://i.imgur.com/omMBd8n.png" width="750" alt="Creating a new Group Policy Object"></p>
+   <p align="center"><img src="https://i.imgur.com/g5CWiWe.png" width="750" alt="Creating a new Group Policy Object"></p>
 
 3. Give the GPO a clear, descriptive name. Spaces are allowed.
 
-   <p align="center"><img src="https://i.imgur.com/MqpBeX5.png" width="750" alt="Naming a new Group Policy Object"></p>
+   <p align="center"><img src="https://i.imgur.com/mspuDv0.png" width="750" alt="Naming a new Group Policy Object"></p>
 
 4. Right-click the new GPO and select **Edit**.
 
