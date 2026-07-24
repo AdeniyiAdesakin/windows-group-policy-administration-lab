@@ -78,7 +78,7 @@ I linked the GPO to the designated user OU and validated that the affected user'
   <img src="https://i.imgur.com/Wa5iOFW.png" width="750" alt="Windows power menu after the Group Policy setting was applied">
 </p>
 
-> This setting removes access to the listed interface commands. It should not be described as preventing every possible method of shutting down a computer.
+
 
 ### 2. Restricted Interactive Command Prompt Access
 
@@ -96,7 +96,7 @@ After linking the policy to the intended user OU, I tested it from a client sess
   <img src="https://i.imgur.com/Oda4CeE.png" width="750" alt="Command Prompt displaying an administrator restriction message">
 </p>
 
-> Blocking Command Prompt does not automatically block PowerShell, Windows Terminal, scripts, or other administrative tools. Stronger application control would require additional controls such as AppLocker or Windows Defender Application Control.
+
 
 ### 3. Configured the Domain Password Policy
 
@@ -114,7 +114,7 @@ Because the settings were intended for domain accounts, I linked the policy at t
   <img src="https://i.imgur.com/cuDz3Sh.png" width="750" alt="Windows rejecting a password that does not meet the domain policy">
 </p>
 
-Each Active Directory domain has one effective domain account policy. If different groups require different password policies, fine-grained password policies should be used instead of linking password-policy GPOs to user OUs.
+
 
 ### 4. Deployed Firefox with Group Policy
 
@@ -136,7 +136,6 @@ I referenced the installer by its full UNC path, selected **Assigned**, linked t
   <img src="https://i.imgur.com/oAa6dtq.png" width="750" alt="Firefox installed on the Windows client through Group Policy">
 </p>
 
-For secure software distribution, target computer accounts need read access to both the share and the MSI file. Standard users and `Everyone` should not receive unnecessary write access.
 
 ## Secure Software-Share Permissions
 
