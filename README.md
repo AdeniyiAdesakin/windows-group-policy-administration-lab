@@ -36,28 +36,15 @@ To address this, I created separate GPOs for each requirement, linked them to th
 | Software package | Mozilla Firefox Enterprise MSI | Demonstrates centralized computer-based deployment |
 | Distribution point | SMB network share | Provides domain computers with access to the MSI package |
 
-## Policy Design
-
-| Recommended GPO name | Configuration type | Scope | Validation |
-| --- | --- | --- | --- |
-| `USR - Restrict Power Commands` | User Configuration | Designated user OU | Shut down, restart, sleep, and hibernate commands were removed from the Windows interface |
-| `USR - Disable Command Prompt` | User Configuration | Designated user OU | Command Prompt displayed an administrator restriction message |
-| `DOM - Password Policy` | Computer Configuration / Account Policies | Domain root | A password that did not satisfy the configured requirements was rejected |
-| `CMP - Deploy Firefox` | Computer Configuration / Software Installation | Target computer scope | Firefox was installed and available on the Windows client after policy processing |
-
-> **Project scope:** The user restrictions in this lab demonstrate centralized configuration. Removing power commands or blocking Command Prompt alone is not a complete security boundary.
 
 ## Skills Demonstrated
 
 - Group Policy creation, configuration, and linking
 - User Configuration and Computer Configuration policies
-- OU and domain-level policy scoping
 - Administrative Template configuration
 - Domain password-policy administration
 - MSI software assignment through Group Policy
-- UNC paths and SMB distribution points
-- Client-side policy refresh and validation
-- Resultant Set of Policy analysis with `gpresult`
+- Policy confirmation with `gpresult` 
 - Group Policy troubleshooting and documentation
 
 ## Implementation Summary
@@ -144,14 +131,12 @@ I validated the policies through visible client behavior and the following admin
 ```powershell
 gpupdate /force
 gpresult /r
-gpresult /h "$env:USERPROFILE\Desktop\GPOReport.html" /f
-net accounts /domain
+
 ```
 
 - `gpupdate /force` requests an immediate user and computer policy refresh.
 - `gpresult /r` displays a summary of the policies applied to the current user and computer.
-- `gpresult /h` generates an HTML Resultant Set of Policy report for deeper review.
-- `net accounts /domain` displays the effective domain password settings.
+
 
 For additional evidence, GPMC's **Group Policy Results Wizard** can show the winning GPO for each applied setting.
 
