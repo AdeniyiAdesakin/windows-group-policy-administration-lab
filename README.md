@@ -183,19 +183,19 @@ It also demonstrated the importance of secure scoping and distribution. Broad do
 
 4. Right-click the new GPO and select **Edit**.
 
-   <p align="center"><img src="https://i.imgur.com/lXuGE4W.png" width="750" alt="Editing a new Group Policy Object"></p>
+   <p align="center"><img src="https://i.imgur.com/QhEBU9j.png" width="750" alt="Editing a new Group Policy Object"></p>
 
 5. Navigate to **User Configuration > Policies > Administrative Templates > Start Menu and Taskbar** and open the power-command policy.
 
-   <p align="center"><img src="https://i.imgur.com/ODoh6oJ.png" width="750" alt="Locating the Windows power-command policy setting"></p>
+   <p align="center"><img src="https://i.imgur.com/O2MWyMX.png" width="750" alt="Locating the Windows power-command policy setting"></p>
 
 6. Select **Enabled**, apply the setting, and close the editor.
 
-   <p align="center"><img src="https://i.imgur.com/HjqBZpJ.png" width="750" alt="Enabling the power-command restriction policy"></p>
+   <p align="center"><img src="https://i.imgur.com/borBqRq.png" width="750" alt="Enabling the power-command restriction policy"></p>
 
 7. Right-click the intended user OU and select **Link an Existing GPO**.
 
-   <p align="center"><img src="https://i.imgur.com/Ng0gue3.png" width="750" alt="Linking a Group Policy Object to a user OU"></p>
+   <p align="center"><img src="https://i.imgur.com/jMn0uyk.png" width="750" alt="Linking a Group Policy Object to a user OU"></p>
 
 8. Select the new GPO and confirm the link.
 
