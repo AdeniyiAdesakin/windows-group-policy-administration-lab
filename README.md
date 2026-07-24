@@ -216,31 +216,31 @@ It also demonstrated the importance of secure scoping and distribution. Broad do
 
 1. Create a separate GPO and open it in Group Policy Management Editor.
 
-   <p align="center"><img src="https://i.imgur.com/NeEcZEJ.png" width="750" alt="Opening the Command Prompt restriction GPO for editing"></p>
+   <p align="center"><img src="https://i.imgur.com/jMn0uyk.png" width="750" alt="Opening the Command Prompt restriction GPO for editing"></p>
 
 2. Navigate to **User Configuration > Policies > Administrative Templates > System**.
 
-   <p align="center"><img src="https://i.imgur.com/wwUo9D7.png" width="750" alt="Opening System Administrative Templates"></p>
+   <p align="center"><img src="https://i.imgur.com/x5E7UFz.png" width="750" alt="Opening System Administrative Templates"></p>
 
 3. Open **Prevent access to the command prompt**.
 
-   <p align="center"><img src="https://i.imgur.com/TLQopUo.png" width="750" alt="Selecting the Command Prompt restriction policy"></p>
+   <p align="center"><img src="https://i.imgur.com/6i0C8z7.png" width="750" alt="Selecting the Command Prompt restriction policy"></p>
 
 4. Select **Enabled**, review the script-processing option, and apply the setting.
 
-   <p align="center"><img src="https://i.imgur.com/QDb5sbZ.png" width="750" alt="Enabling the Command Prompt restriction"></p>
+   <p align="center"><img src="https://i.imgur.com/sEJREEh.png" width="750" alt="Enabling the Command Prompt restriction"></p>
 
 5. Link the GPO to the intended user OU.
 
-   <p align="center"><img src="https://i.imgur.com/z0nAVam.png" width="750" alt="Linking the Command Prompt policy to a user OU"></p>
+   <p align="center"><img src="https://i.imgur.com/JF9ZADB.png" width="750" alt="Linking the Command Prompt policy to a user OU"></p>
 
 6. Confirm that the GPO appears beneath the targeted OU.
 
-   <p align="center"><img src="https://i.imgur.com/dpQxn9w.png" width="750" alt="Verifying the Command Prompt GPO link"></p>
+   <p align="center"><img src="https://i.imgur.com/ALvG4nd.png" width="750" alt="Verifying the Command Prompt GPO link"></p>
 
 7. Sign in as an affected user and launch Command Prompt to validate the restriction.
 
-   <p align="center"><img src="https://i.imgur.com/Oda4CeE.png" width="750" alt="Validating restricted Command Prompt access"></p>
+   <p align="center"><img src="https://i.imgur.com/QyIJcpq.png" width="750" alt="Validating restricted Command Prompt access"></p>
 
 </details>
 
