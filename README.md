@@ -34,7 +34,6 @@ To address this, I created separate GPOs for each requirement, linked them to th
 | Client workstation | Windows 10 | Receives and validates user and computer policies |
 | Policy management | Group Policy Management Console | Creates, configures, links, and reviews GPOs |
 | Software package | Mozilla Firefox Enterprise MSI | Demonstrates centralized computer-based deployment |
-| Distribution point | SMB network share | Provides domain computers with access to the MSI package |
 
 
 ## Skills Demonstrated
