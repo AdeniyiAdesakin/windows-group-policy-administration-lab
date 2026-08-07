@@ -145,7 +145,7 @@ For additional evidence, GPMC's **Group Policy Results Wizard** can show the win
 | The expected password policy is not effective | The account policy is linked below the domain root or loses precedence | Review domain-root links and confirm the effective settings with `net accounts /domain` |
 | Command Prompt remains available | The wrong user is being tested or the user policy has not refreshed | Run `gpupdate /force`, sign out, sign back in, and verify with `gpresult` |
 
-## Security and Administration Practices
+## Recommended Security and Administration Practices
 
 - Use descriptive GPO names that identify the target and purpose. GPO names can contain spaces.
 - Keep separate GPOs for logically separate settings to simplify testing and troubleshooting.
