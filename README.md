@@ -144,7 +144,6 @@ For additional evidence, GPMC's **Group Policy Results Wizard** can show the win
 | The MSI package does not install | The computer cannot read the share, the package was selected by local path, or a restart has not occurred | Test the UNC path, review share and NTFS permissions, and restart the client |
 | The expected password policy is not effective | The account policy is linked below the domain root or loses precedence | Review domain-root links and confirm the effective settings with `net accounts /domain` |
 | Command Prompt remains available | The wrong user is being tested or the user policy has not refreshed | Run `gpupdate /force`, sign out, sign back in, and verify with `gpresult` |
-| Group Policy processing reports errors | DNS, SYSVOL access, network connectivity, or replication is unavailable | Verify domain DNS, test access to `\\<domain-name>\SYSVOL`, and review the GroupPolicy Operational event log |
 
 ## Security and Administration Practices
 
