@@ -281,7 +281,9 @@ It also demonstrated the importance of secure scoping and distribution. Broad do
 
    <p align="center"><img src="https://i.imgur.com/9BtprUU.png" width="750" alt="Creating the MSI package distribution folder"></p>
 
-3. Configure share and NTFS permissions so deployment administrators can manage packages and target computer accounts have read access.
+3. Configure share and NTFS permissions so deployment administrators can manage packages and target computer accounts have read access. 
+
+ <p align="center"><img src="https://i.imgur.com/7q4theh.png" width="750" alt="Creating the MSI package distribution folder"></p>
 
 4. Copy the approved MSI file into the distribution folder.
 
