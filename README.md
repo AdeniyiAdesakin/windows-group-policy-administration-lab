@@ -4,7 +4,7 @@
 
 ## Project Overview
 
-I designed, configured, scoped, and tested four Group Policy Objects (GPOs) in a Windows Active Directory lab. The policies controlled selected user-interface features, restricted access to Command Prompt, enforced a domain password policy, and deployed Mozilla Firefox to Windows client computers from a shared MSI package.
+I designed, configured, scoped, and tested four Group Policy Objects (GPOs) in a Windows Active Directory lab. The policies controlled selected user-interface features, restricted access to Command Prompt on clients' computer, enforced a domain password policy, and deployed Mozilla Firefox to Windows client computers from a shared MSI package.
 
 This project demonstrates how Group Policy can be used to apply consistent user and computer settings across an Active Directory environment while reducing the need to configure endpoints individually.
 
