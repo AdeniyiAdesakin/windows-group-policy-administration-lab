@@ -78,10 +78,9 @@ After linking the policy to the intended user OU, I tested it from a client sess
   <img src="https://i.imgur.com/nUnLMPY.png" width="750" alt="Enabling the policy that restricts Command Prompt access">
 </p>
 
-<p align="center">
-  <img src="htt" width="750" alt="Command Prompt displaying an administrator restriction message">
-</p>
-
+  <p align="center">
+    <img src="https://i.imgur.com/QyIJcpq.png" width="750" alt="Validating restricted Command Prompt access">
+  </p>
 
 
 ### 3. Configured the Domain Password Policy
